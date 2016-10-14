@@ -7,6 +7,9 @@ sentence = "sentence"; paragraph = "paragraph"; vimword = "vimword"; lineboundar
 class Movement
   opposite: forward: backward, backward: forward
 
+  readSelected: ->
+    alert(@selection.toString())
+
   constructor: (@alterMethod) ->
     @selection = window.getSelection()
 
@@ -207,6 +210,7 @@ class VisualMode extends KeyHandlerMode
         @movement.collapseSelectionToFocus()
       new CaretMode
     "o": -> @movement.reverseSelection()
+    "r": -> @movement.readSelected()
 
   constructor: (options = {}) ->
     @movement = new Movement options.alterMethod ? "extend"
