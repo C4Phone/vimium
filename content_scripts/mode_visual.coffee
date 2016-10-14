@@ -8,7 +8,10 @@ class Movement
   opposite: forward: backward, backward: forward
 
   readSelected: ->
-    alert(@selection.toString())
+    window.speechSynthesis.speak(
+      new SpeechSynthesisUtterance(@selection.toString())
+    )
+    # chrome.tts.speak(@selection.toString())
 
   constructor: (@alterMethod) ->
     @selection = window.getSelection()
