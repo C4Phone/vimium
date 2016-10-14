@@ -8,9 +8,10 @@ class Movement
   opposite: forward: backward, backward: forward
 
   readSelected: ->
-    window.speechSynthesis.speak(
-      new SpeechSynthesisUtterance(@selection.toString())
-    )
+    # BOOKMARK
+    utter = new SpeechSynthesisUtterance(@selection.toString())
+    utter.lang = "en-us"
+    window.speechSynthesis.speak utter
     @selection.setPosition @selection.focusNode, @selection.focusOffset
     @selection.modify "extend", forward, word
     # chrome.tts.speak(@selection.toString())

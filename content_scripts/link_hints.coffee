@@ -161,6 +161,16 @@ class LinkHintsMode
     @markerMatcher = new (if Settings.get "filterLinkHints" then FilterHints else AlphabetHints)
     @markerMatcher.fillInMarkers @hintMarkers, @.getNextZIndex.bind this
 
+    speechHint = ""
+
+    #BOOKMARK
+    for i in [0..hintDescriptors.length-1]
+      speechHint+= "Use tag " + (@hintMarkers[i].textContent) + " for "
+      speechHint+= ((HintCoordinator.getLocalHintMarker hintDescriptors[i]).element.textContent) + ". "
+    utter = new SpeechSynthesisUtterance(speechHint)
+    utter.lang = "en-us"
+    window.speechSynthesis.speak utter
+
     @hintMode = new Mode
       name: "hint/#{@mode.name}"
       indicator: false
@@ -451,6 +461,7 @@ class AlphabetHints
     @useKeydown = /^[a-z0-9]*$/.test @linkHintCharacters
     @hintKeystrokeQueue = []
 
+  # BOOKMARK
   fillInMarkers: (hintMarkers) ->
     hintStrings = @hintStrings(hintMarkers.length)
     for marker, idx in hintMarkers
