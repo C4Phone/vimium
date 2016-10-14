@@ -449,6 +449,7 @@ class LinkHintsMode
   removeHintMarkers: ->
     DomUtils.removeElement @hintMarkerContainingDiv if @hintMarkerContainingDiv
     @hintMarkerContainingDiv = null
+    window.speechSynthesis.cancel()
 
 # Use characters for hints, and do not filter links by their text.
 class AlphabetHints

@@ -216,7 +216,10 @@ class VisualMode extends KeyHandlerMode
         @movement.collapseSelectionToFocus()
       new CaretMode
     "o": -> @movement.reverseSelection()
+
+    # Bookmark
     "r": -> @movement.readSelected()
+    "R": -> window.speechSynthesis.cancel()
 
   constructor: (options = {}) ->
     @movement = new Movement options.alterMethod ? "extend"
