@@ -11,6 +11,8 @@ class Movement
     window.speechSynthesis.speak(
       new SpeechSynthesisUtterance(@selection.toString())
     )
+    @selection.setPosition @selection.focusNode, @selection.focusOffset
+    @selection.modify "extend", forward, word
     # chrome.tts.speak(@selection.toString())
 
   constructor: (@alterMethod) ->
