@@ -169,6 +169,11 @@ class LinkHintsMode
       speechHint+= ((HintCoordinator.getLocalHintMarker hintDescriptors[i]).element.textContent) + ". "
     utter = new SpeechSynthesisUtterance(speechHint)
     utter.lang = "en-us"
+    findAlex = window.speechSynthesis.getVoices().filter((x) -> 
+        return x.name == "Alex" && x.lang == "en-US"
+    );
+    if(findAlex.length > 0)
+        utter.voice = findAlex[0]
     window.speechSynthesis.speak utter
 
     @hintMode = new Mode
