@@ -11,6 +11,11 @@ class Movement
     # BOOKMARK
     utter = new SpeechSynthesisUtterance(@selection.toString())
     utter.lang = "en-us"
+    findAlex = window.speechSynthesis.getVoices().filter((x) -> 
+        return x.name == "Alex" && x.lang == "en-US"
+    );
+    if(findAlex.length > 0)
+        utter.voice = findAlex[0]
     window.speechSynthesis.speak utter
     @selection.setPosition @selection.focusNode, @selection.focusOffset
     @selection.modify "extend", forward, word
